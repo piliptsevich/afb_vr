@@ -1,0 +1,180 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v2.1.0/dist/aframe-physics-system.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.12.4/dist/aframe-extras.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+      crossorigin="anonymous">
+    </script>
+    <script>
+      // AFRAME.registerComponent('adding_entities', {
+      //   init: function () {
+      //     // Solution for Creating Entities.
+      //     var sceneEl = document.querySelector('a-scene'); 
+        
+      //     var entityEl = document.createElement('a-entity');
+      //       entityEl.setAttribute('id', "cube_animation_scaling");
+      //       boxEl.setAttribute('position', "0 1 -2.5");
+      //       boxEl.setAttribute('animation-mixer', "clip: default");
+      //       boxEl.setAttribute('object-model', "src: url(models/cube_animation_scaling.json);");
+
+      //       sceneEl.appendChild(entityEl);
+      //   }
+      // });
+
+      //  function remove_entity(){
+
+      //       document.querySelector('#cube_animation_scaling').setAttribute('visible', false)
+      //       // this.el.setObject3D('light', new THREE.Light());
+      //       // Light is now part of the scene.
+      //       // object3DMap.light is now a THREE.Light() object.
+      //     }
+
+      // };
+    </script>  
+
+  </head>
+  <body>
+    <!-- <button id="toggler" onclick="remove_entity()">Animaton Toggler</button> -->
+
+    <a-scene adding_entities removing">
+      <a-sky color="#ECECEC"></a-sky>
+      <a-light color="#fff" position="6 5 0" intensity="3.5"></a-light>
+      <a-camera fly look-controls wasd-controls position="0 10 0">  
+        <a-entity 
+          cursor="fuse: true; fuseTimeout: 500"
+          position="0 0 -1"
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+          material="color: black; shader: flat">
+        </a-entity>
+      </a-camera>
+
+      <a-assets>
+        <a-asset-item id="standing_still" src="models/cube_animation_standing_still.gltf"></a-asset-item>
+        <a-asset-item id="bouncing" src="models/cube_animation.json"></a-asset-item>
+        <a-asset-item id="vibro" src="models/cube_animation_vibro.gltf"></a-asset-item>
+        <a-asset-item id="scaling" src="models/cube_animation_scaling.json"></a-asset-item>
+        <a-asset-item id="afb_animation" src="models/afb_animation.gltf"></a-asset-item>
+        <a-asset-item id="afb_animation2" src="models/afb_animation.glb"></a-asset-item>
+        <!-- GLTF animation samples -->
+        <a-asset-item id="AnimatedMorphCube" src="models/AnimatedMorphCube.gltf"></a-asset-item>
+        <a-asset-item id="RiggedSimple" src="models/RiggedSimple.gltf"></a-asset-item>
+        <a-asset-item id="BoxAnimated" src="models/BoxAnimated.gltf"></a-asset-item>
+        <a-asset-item id="shape_animation" src="models/shape_animation.gltf"></a-asset-item>
+        <a-asset-item id="Knot6torbackanimation" src="models/scene.gltf"></a-asset-item>
+                
+      </a-assets>
+
+<!--       <a-entity    
+        id ="afb_animation"
+        cursor-listener
+        duration="100"
+        scale="0.5 0.5 0.5"
+        position="0 1 -10"
+        rotation="0 0 0"
+        animation-mixer="clip: default"
+        object-model="src: url(models/afb_animation.json);"
+      ></a-entity>  --> 
+
+      <!-- <a-entity gltf-model="#afb_animation" ></a-entity> -->
+
+<!--       <a-entity    
+        id ="eva_animation"
+        cursor-listener
+        duration="100"
+        scale="0.5 0.5 0.5"
+        position="10 10 -2.5"
+        rotation="0 0 0"
+        animation-mixer="clip: walk"
+        json-model="src: url(models/eva-animated.json);"
+      ></a-entity> 
+ -->
+
+<!--       <a-entity    
+        id ="cube_animation_scaling"
+        visible="true"
+        position="0 0 5"
+        animation-mixer="clip: default"
+        object-model="src: url(models/cube_animation.json);"
+      ></a-entity>  
+
+      <a-entity    
+        id ="cube_animation_bouncing"
+        visible="true"
+        position="0 0 0"
+        animation-mixer="clip: default"
+        object-model="src: url(models/cube_animation_scaling.json);"
+      ></a-entity>   -->
+
+
+
+<!--       <a-entity position="5 10 -2.5" gltf-model="#bouncing" animation-mixer></a-entity>
+      <a-entity position="5 5 -2.5" gltf-model="#standing_still" animation-mixer></a-entity>
+      <a-entity position="5 15 -2.5" gltf-model="#vibro" animation-mixer></a-entity>
+      <a-entity position="5 20 -2.5" gltf-model="#scaling" animation-mixer></a-entity> -->
+
+      <!-- AFB animations GLTF -->
+      <!-- Works good -->
+      <a-entity position="0 0 0" gltf-model="#afb_animation" animation-mixer></a-entity>
+      <!-- <a-entity position="0 0 0" gltf-model="#shape_animation" animation-mixer></a-entity> -->
+      <!-- <a-entity gltf-model="#Knot6torbackanimation" scale="0.01 0.01 0.01" animation-mixer></a-entity> -->
+      <!-- Don't work -->
+      <!-- <a-entity position="20 0 0" gltf-model="#afb_animation2" animation-mixer></a-entity> -->
+
+      <!-- GLTF animation samples -->
+<!--       <a-entity position="0 0 0" gltf-model="#AnimatedMorphCube" animation-mixer></a-entity>
+      <a-entity position="0 0 5" gltf-model="#RiggedSimple" animation-mixer></a-entity>
+      <a-entity position="0 0 10" gltf-model="#BoxAnimated" animation-mixer></a-entity> -->
+
+<!-- progressiveMaterials.json -->
+<!--       <a-entity    
+        id ="progressiveMaterials"
+        cursor-listener
+        duration="100"
+        scale="0.5 0.5 0.5"
+        position="0 1 -2.5"
+        rotation="0 0 0"
+        animation-mixer="clip: default"
+        object-model="src: url(models/progressiveMaterials.json);"
+      ></a-entity> 
+ -->
+<!--       <a-entity    
+        id ="rainboxreveal"
+        cursor-listener
+        duration="100"
+        scale="0.5 0.5 0.5"
+        position="0 0 0"
+        rotation="0 0 0"
+        animation-mixer="clip: default"
+        object-model="src: url(models/rainboxreveal.json);"
+      ></a-entity> 
+ -->
+
+<!-- cube_shape_key_animation.json -->
+<!--     <a-entity    
+        id ="cube_shape_key_animation"
+        cursor-listener
+        duration="100"
+        scale="0.5 0.5 0.5"
+        position="0 0 0"
+        rotation="0 0 0"
+        animation-mixer="clip: default"
+        object-model="src: url(models/cube_shape_key_animation.json);"
+      ></a-entity> 
+ -->
+    </a-scene>
+
+<!-- <script type="text/javascript">
+  $(document).ready(function() {
+      $("#cube_animation_bouncing").hide();
+      $("#cube_animation_scaling").show();
+
+      $("#toggler").click(function() {
+           $("#cube_animation_bouncing, #cube_animation_bouncing").toggle();
+      });
+  });
+</script> -->
+  </body>
+</html>
