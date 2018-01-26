@@ -40,9 +40,17 @@
     <!-- <button id="toggler" onclick="remove_entity()">Animaton Toggler</button> -->
 
     <a-scene adding_entities removing">
-      <a-sky color="#ECECEC"></a-sky>
-      <a-light color="#fff" position="6 5 0" intensity="3.5"></a-light>
-      <a-camera fly look-controls wasd-controls position="0 10 0">  
+      <a-sky color="#f2bb76"></a-sky>
+
+      <!-- LIGHT a-frame no need to export from blender -->
+      <a-light color="#fff" position="-8 5 0" intensity="3.5" light="intensity:2"></a-light>
+      <a-light color="#fff" position="0 5 -14.163" intensity="3.5" light="intensity:2"></a-light>
+      <a-light color="#fff" position="0 5 14.192" intensity="3.5" light="intensity:2"></a-light>
+      <a-light color="#fff" position="0 -9.574 -2.443" intensity="3.5" light="intensity:2"></a-light>
+      <a-light color="#fff" position="8.5 5 0" intensity="3.5" light="intensity:2"></a-light>
+
+      <!-- CAMERA with wasd controls and circle cursor -->
+      <a-camera fly look-controls wasd-controls position="0 15 0">  
         <a-entity 
           cursor="fuse: true; fuseTimeout: 500"
           position="0 0 -1"
@@ -51,20 +59,27 @@
         </a-entity>
       </a-camera>
 
+      <!-- ASSESTS links to models; to call an asset use <a-entity> -->
       <a-assets>
         <a-asset-item id="standing_still" src="models/cube_animation_standing_still.gltf"></a-asset-item>
         <a-asset-item id="bouncing" src="models/cube_animation.json"></a-asset-item>
         <a-asset-item id="vibro" src="models/cube_animation_vibro.gltf"></a-asset-item>
         <a-asset-item id="scaling" src="models/cube_animation_scaling.json"></a-asset-item>
+
+        <!-- GLTF animation samples -->
         <a-asset-item id="afb_animation" src="models/afb_animation.gltf"></a-asset-item>
         <a-asset-item id="afb_animation2" src="models/afb_animation.glb"></a-asset-item>
-        <!-- GLTF animation samples -->
+        <a-asset-item id="Tank_Fill" src="models/Tank_Fill.gltf"></a-asset-item>
+        <a-asset-item id="Cylinder_grey_levelgltf" src="models/Cylinder_grey_levelgltf.gltf"></a-asset-item>
+        <a-asset-item id="grey_balls_blow_off" src="models/grey_balls_blow_off.gltf"></a-asset-item>
+
+
         <a-asset-item id="AnimatedMorphCube" src="models/AnimatedMorphCube.gltf"></a-asset-item>
         <a-asset-item id="RiggedSimple" src="models/RiggedSimple.gltf"></a-asset-item>
         <a-asset-item id="BoxAnimated" src="models/BoxAnimated.gltf"></a-asset-item>
         <a-asset-item id="shape_animation" src="models/shape_animation.gltf"></a-asset-item>
-        <a-asset-item id="Knot6torbackanimation" src="models/scene.gltf"></a-asset-item>
-                
+        <a-asset-item id="Knot6torbackanimation" src="models/scene.gltf"></a-asset-item>   
+
       </a-assets>
 
 <!--       <a-entity    
@@ -118,6 +133,10 @@
       <!-- AFB animations GLTF -->
       <!-- Works good -->
       <a-entity position="0 0 0" gltf-model="#afb_animation" animation-mixer></a-entity>
+      <a-entity position="0 0 0" gltf-model="#Tank_Fill" animation-mixer></a-entity>
+      <a-entity position="0 0 0" gltf-model="#Cylinder_grey_levelgltf" animation-mixer></a-entity>
+      <a-entity position="0 0 0" gltf-model="#grey_balls_blow_off" animation-mixer></a-entity>
+
       <!-- <a-entity position="0 0 0" gltf-model="#shape_animation" animation-mixer></a-entity> -->
       <!-- <a-entity gltf-model="#Knot6torbackanimation" scale="0.01 0.01 0.01" animation-mixer></a-entity> -->
       <!-- Don't work -->
@@ -166,6 +185,21 @@
  -->
     </a-scene>
 
+<script type="text/javascript">
+    var scene = document.querySelector('a-scene');
+    var timeout;
+  if (scene.hasLoaded) {
+    run();
+  } else {
+    scene.addEventListener('loaded', run);
+  }
+  function run () {
+    var entity = scene.querySelector('a-entity');
+      timeout = setTimeout(function(){    entity.setAttribute('animation-mixer', 'clip', 'none');
+}, 3000);
+  }
+</script>
+
 <!-- <script type="text/javascript">
   $(document).ready(function() {
       $("#cube_animation_bouncing").hide();
@@ -176,5 +210,6 @@
       });
   });
 </script> -->
+
   </body>
 </html>
