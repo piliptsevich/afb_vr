@@ -1,13 +1,10 @@
 <html>
   <head>
-    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v2.1.0/dist/aframe-physics-system.min.js"></script>
-    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.12.4/dist/aframe-extras.min.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
-      crossorigin="anonymous">
-    </script>
+<script src="libs/aframe.min.js"> </script>
+<script src="libs/jquery-3.3.1.min.js"> </script>
+<script src="libs/aframe-extras.min.js"> </script>
+<script src="components/animation_handler.js"></script>
+<script src="js/logic.js"></script>
     <script>
       // AFRAME.registerComponent('adding_entities', {
       //   init: function () {
@@ -37,10 +34,55 @@
 
   </head>
   <body>
-    <!-- <button id="toggler" onclick="remove_entity()">Animaton Toggler</button> -->
+    <a-scene>
+        <a-plane id="info_panel" color="#000" width="10" height="6.5" position="4.66 -2.198 2.636" rotation="-45.01 90 0" material="shader:msdf;side:double" scale="1.3 1.3 1.3">
 
-    <a-scene adding_entities removing">
-      <a-sky color="#f2bb76"></a-sky>
+          <a-entity id="I_CP_AutoMan_M" position="-4.200 2.500 0.01" geometry="primitive: plane; width: 1; height: .8" material="color: #eee"
+              text="width: 7; alphaTest: 1; value: MAN; color: black; align: center; zOffset: 0.01">
+          </a-entity>          
+          <a-entity id="I_CP_AutoMan_A" position="-3 2.500 0.01" geometry="primitive: plane; width: 1; height: .8" material="color: #eee"
+              text="width: 7; alphaTest: 1; value: AUTO; color: black; align: center; zOffset: 0.01">
+          </a-entity>          
+          <a-entity id="I_Output_full" position="-4.400 1.500 0.01" geometry="primitive: ring; radiusInner: .1; radiusOuter: .2; " material="color: red">
+              <a-text position=".3 0 0" width="7" alphaTest="1" value="I_Output_full" color="#eee" align="left" anchor="left" zOffset="0.01" yOffset="0.5"></a-text>
+          </a-entity>
+          <a-entity id="I_Tanklevel_full" position="-4.400 1 0.01" geometry="primitive: ring; radiusInner: .1; radiusOuter: .2; " material="color: red">
+              <a-text position=".3 0 0" width="7" alphaTest="1" value="I_Tanklevel_full" color="#eee" align="left" anchor="left" zOffset="0.01" yOffset="0.5"></a-text>
+          </a-entity>
+          <a-entity id="I_Tanklevel_low" position="-4.400 0.5 0.01" geometry="primitive: ring; radiusInner: .1; radiusOuter: .2; " material="color: red">
+              <a-text position=".3 0 0" width="7" alphaTest="1" value="I_Tanklevel_low" color="#eee" align="left" anchor="left" zOffset="0.01" yOffset="0.5"></a-text>
+          </a-entity>          
+          <a-entity id="AO_MotorSpeed" position="3.76 0.9 0.01" geometry="width:2;primitive:plane;height:0.45" material="color:#eee">
+              <a-text value="0.0" align="center" position="0 0 0.02" width="7" color="black" text=""></a-text>
+              <a-text align="center" position="0 0.66 0.02" width="7" text="value:AO_MotorSpeed ;color:#ffffff"></a-text>
+          </a-entity>
+          <a-entity id="CNT_All" position="1.4 -2.700 0.010" geometry="primitive: plane; width: 1.2; height: .7; " material="color: #eee">
+              <a-text visible="true" value="0" anchor="align" align="left" position="0 0 0.02" width="11" color='black'>
+              <a-text visible="true" value="ALL" align="center" position="0 .8 0.02" width="11" color='#FFF'>
+          </a-entity>
+          <a-entity id="CNT_Yellow1" position="-1.600 -2.700 0.010" geometry="primitive: circle; radius: .4; " material="color: #eee">
+              <a-text visible="true" value="0" align="center" position="0 0 0.02" width="9" color='black'>
+              <a-text visible="true" value="A"  align="center" position="0 .8 0.02" width="11" color='#FFF'>
+          </a-entity>
+          <a-entity id="CNT_Yellow2" position="-0.7 -2.700 0.010" geometry="primitive: circle; radius: .4; " material="color: #eee">
+              <a-text visible="true" value="0" align="center" position="0 0 0.02" width="9" color='black'>
+              <a-text visible="true" value="B" align="center" position="0 .8 0.02" width="11" color='#FFF'>
+          </a-entity>
+          <a-entity id="CNT_Yellow3" position="0.2 -2.700 0.010" geometry="primitive: circle; radius: .4; " material="color: #eee">
+              <a-text visible="true" value="0" align="center" position="0 0 0.02" width="9" color='black'>
+              <a-text visible="true" value="C" align="center" position="0 .8 0.02" width="11" color='#FFF'>
+          </a-entity>
+          <a-entity id="O_MotorAnalog_On" position="-3.6 -2.700 0.010" geometry="primitive: plane; width: 2.3; height: .7; " material="color: #eee"
+              text="width: 7; alphaTest: 1; value: CONVEYOR ON; color: black; align: center; zOffset: 0.01">            
+          </a-entity>  
+          <a-entity id="motor_speed_outer" position="3.760 -1.350 0.010" geometry="primitive: plane; width: 2; height: 3.400" material="color: #eee">
+              <a-entity id="motor_speed_inner" position="0 -1.7 0.02" geometry="primitive: plane; width: 2; height: .1" material="color:  #0000FF"> </a-entity> 
+          </a-entity>
+                  
+        </a-plane>
+
+      <!-- <a-sky color="#F5F5F5"></a-sky>  -->
+      <a-sky id="image-360" radius="1000" src="#city" opacity=".2"></a-sky> 
 
       <!-- LIGHT a-frame no need to export from blender -->
       <a-light color="#fff" position="-8 5 0" intensity="3.5" light="intensity:2"></a-light>
@@ -50,10 +92,11 @@
       <a-light color="#fff" position="8.5 5 0" intensity="3.5" light="intensity:2"></a-light>
 
       <!-- CAMERA with wasd controls and circle cursor -->
-      <a-camera fly look-controls wasd-controls position="0 15 0">  
+      <a-camera fly look-controls wasd-controls position="15.454 8.009 5.367" rotation="-24.560 88.923 0" >
         <a-entity 
+          id='_cursor'
           cursor="fuse: true; fuseTimeout: 500"
-          position="0 0 -1"
+          position="0 0 -3"
           geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
           material="color: black; shader: flat">
         </a-entity>
@@ -61,155 +104,23 @@
 
       <!-- ASSESTS links to models; to call an asset use <a-entity> -->
       <a-assets>
-        <a-asset-item id="standing_still" src="models/cube_animation_standing_still.gltf"></a-asset-item>
-        <a-asset-item id="bouncing" src="models/cube_animation.json"></a-asset-item>
-        <a-asset-item id="vibro" src="models/cube_animation_vibro.gltf"></a-asset-item>
-        <a-asset-item id="scaling" src="models/cube_animation_scaling.json"></a-asset-item>
+        <!-- GLTF animation assets -->
+        <a-asset-item id="afb_model" src="models/afb_model.gltf"></a-asset-item>
+        <a-asset-item id="I_Output_full_model" src="models/I_Output_full_model.gltf"></a-asset-item>
+        <a-asset-item id="tanklevel_full" src="models/tanklevel_full.gltf"></a-asset-item>
+        <a-asset-item id="tanklevel_low" src="models/tanklevel_low.gltf"></a-asset-item>
+        <a-asset-item id="corn_animation1_loop" src="models/corn_animation1_loop.gltf"></a-asset-item>
 
-        <!-- GLTF animation samples -->
-        <a-asset-item id="afb_animation" src="models/afb_animation.gltf"></a-asset-item>
-        <a-asset-item id="afb_animation2" src="models/afb_animation.glb"></a-asset-item>
-        <a-asset-item id="Tank_Fill" src="models/Tank_Fill.gltf"></a-asset-item>
-        <a-asset-item id="Cylinder_grey_levelgltf" src="models/Cylinder_grey_levelgltf.gltf"></a-asset-item>
-        <a-asset-item id="grey_balls_blow_off" src="models/grey_balls_blow_off.gltf"></a-asset-item>
-
-
-        <a-asset-item id="AnimatedMorphCube" src="models/AnimatedMorphCube.gltf"></a-asset-item>
-        <a-asset-item id="RiggedSimple" src="models/RiggedSimple.gltf"></a-asset-item>
-        <a-asset-item id="BoxAnimated" src="models/BoxAnimated.gltf"></a-asset-item>
-        <a-asset-item id="shape_animation" src="models/shape_animation.gltf"></a-asset-item>
-        <a-asset-item id="Knot6torbackanimation" src="models/scene.gltf"></a-asset-item>   
-
+        <img id="city" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg">
       </a-assets>
 
-<!--       <a-entity    
-        id ="afb_animation"
-        cursor-listener
-        duration="100"
-        scale="0.5 0.5 0.5"
-        position="0 1 -10"
-        rotation="0 0 0"
-        animation-mixer="clip: default"
-        object-model="src: url(models/afb_animation.json);"
-      ></a-entity>  --> 
-
-      <!-- <a-entity gltf-model="#afb_animation" ></a-entity> -->
-
-<!--       <a-entity    
-        id ="eva_animation"
-        cursor-listener
-        duration="100"
-        scale="0.5 0.5 0.5"
-        position="10 10 -2.5"
-        rotation="0 0 0"
-        animation-mixer="clip: walk"
-        json-model="src: url(models/eva-animated.json);"
-      ></a-entity> 
- -->
-
-<!--       <a-entity    
-        id ="cube_animation_scaling"
-        visible="true"
-        position="0 0 5"
-        animation-mixer="clip: default"
-        object-model="src: url(models/cube_animation.json);"
-      ></a-entity>  
-
-      <a-entity    
-        id ="cube_animation_bouncing"
-        visible="true"
-        position="0 0 0"
-        animation-mixer="clip: default"
-        object-model="src: url(models/cube_animation_scaling.json);"
-      ></a-entity>   -->
-
-
-
-<!--       <a-entity position="5 10 -2.5" gltf-model="#bouncing" animation-mixer></a-entity>
-      <a-entity position="5 5 -2.5" gltf-model="#standing_still" animation-mixer></a-entity>
-      <a-entity position="5 15 -2.5" gltf-model="#vibro" animation-mixer></a-entity>
-      <a-entity position="5 20 -2.5" gltf-model="#scaling" animation-mixer></a-entity> -->
-
-      <!-- AFB animations GLTF -->
-      <!-- Works good -->
-      <a-entity position="0 0 0" gltf-model="#afb_animation" animation-mixer></a-entity>
-      <a-entity position="0 0 0" gltf-model="#Tank_Fill" animation-mixer></a-entity>
-      <a-entity position="0 0 0" gltf-model="#Cylinder_grey_levelgltf" animation-mixer></a-entity>
-      <a-entity position="0 0 0" gltf-model="#grey_balls_blow_off" animation-mixer></a-entity>
-
-      <!-- <a-entity position="0 0 0" gltf-model="#shape_animation" animation-mixer></a-entity> -->
-      <!-- <a-entity gltf-model="#Knot6torbackanimation" scale="0.01 0.01 0.01" animation-mixer></a-entity> -->
-      <!-- Don't work -->
-      <!-- <a-entity position="20 0 0" gltf-model="#afb_animation2" animation-mixer></a-entity> -->
-
-      <!-- GLTF animation samples -->
-<!--       <a-entity position="0 0 0" gltf-model="#AnimatedMorphCube" animation-mixer></a-entity>
-      <a-entity position="0 0 5" gltf-model="#RiggedSimple" animation-mixer></a-entity>
-      <a-entity position="0 0 10" gltf-model="#BoxAnimated" animation-mixer></a-entity> -->
-
-<!-- progressiveMaterials.json -->
-<!--       <a-entity    
-        id ="progressiveMaterials"
-        cursor-listener
-        duration="100"
-        scale="0.5 0.5 0.5"
-        position="0 1 -2.5"
-        rotation="0 0 0"
-        animation-mixer="clip: default"
-        object-model="src: url(models/progressiveMaterials.json);"
-      ></a-entity> 
- -->
-<!--       <a-entity    
-        id ="rainboxreveal"
-        cursor-listener
-        duration="100"
-        scale="0.5 0.5 0.5"
-        position="0 0 0"
-        rotation="0 0 0"
-        animation-mixer="clip: default"
-        object-model="src: url(models/rainboxreveal.json);"
-      ></a-entity> 
- -->
-
-<!-- cube_shape_key_animation.json -->
-<!--     <a-entity    
-        id ="cube_shape_key_animation"
-        cursor-listener
-        duration="100"
-        scale="0.5 0.5 0.5"
-        position="0 0 0"
-        rotation="0 0 0"
-        animation-mixer="clip: default"
-        object-model="src: url(models/cube_shape_key_animation.json);"
-      ></a-entity> 
- -->
+      <!-- Entities representing GLTF models -->
+      <a-entity id="_afb_model" position="0 0 0" gltf-model="#afb_model" animation_handler="pause: true"></a-entity>
+      <a-entity id="_I_Output_full_model" position="0 0 0" gltf-model="#I_Output_full_model" visible="false"></a-entity>
+      <a-entity id="_tanklevel_full" position="0 0 0" gltf-model="#tanklevel_full" visible="true"></a-entity>
+      <a-entity id="_tanklevel_low" position="0 0 0" gltf-model="#tanklevel_low" visible="false"></a-entity>
+      <a-entity id="_corn_animation1_loop"  position="0 0 0" gltf-model="#corn_animation1_loop" animation_handler="pause: true"></a-entity>
     </a-scene>
-
-<script type="text/javascript">
-    var scene = document.querySelector('a-scene');
-    var timeout;
-  if (scene.hasLoaded) {
-    run();
-  } else {
-    scene.addEventListener('loaded', run);
-  }
-  function run () {
-    var entity = scene.querySelector('a-entity');
-      timeout = setTimeout(function(){    entity.setAttribute('animation-mixer', 'clip', 'none');
-}, 3000);
-  }
-</script>
-
-<!-- <script type="text/javascript">
-  $(document).ready(function() {
-      $("#cube_animation_bouncing").hide();
-      $("#cube_animation_scaling").show();
-
-      $("#toggler").click(function() {
-           $("#cube_animation_bouncing, #cube_animation_bouncing").toggle();
-      });
-  });
-</script> -->
-
+    
   </body>
 </html>
