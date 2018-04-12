@@ -134,6 +134,6 @@ $('document').ready(function(){
         }
         // console.log(obj);
       });   
-    }, 300); // refresh
+    }, 15000); // refresh
   });
 });
